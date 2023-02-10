@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react'
+import ThemeSwitcher from './ThemeSwitcher'
 
 // interface Properties {
 // 	error?: Error
@@ -46,14 +47,11 @@ export default function Navigation(): ReactElement {
 			</div>
 			<div className='drawer-side'>
 				<label htmlFor='my-drawer-3' className='drawer-overlay' />
-				<ul className='menu w-80 bg-base-100 p-4'>
-					<li>
-						<a>Sidebar Item 1</a>
-					</li>
-					<li>
-						<a>Sidebar Item 2</a>
-					</li>
-				</ul>
+				<div className='menu flex w-80 flex-col content-center gap-4 bg-base-100 p-4'>
+					<h1 className='mt-4 text-center text-2xl font-bold'>Task List</h1>
+					<ThemeSwitcher />
+					<button className='btn btn-primary w-3/4'>Add Task</button>
+				</div>
 			</div>
 		</div>
 	)
