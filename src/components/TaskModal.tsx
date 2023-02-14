@@ -2,11 +2,7 @@ import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-export default function TaskModal(): ReactElement {
-	const [existingTasks, setExistingTasks] = useState(
-		JSON.parse(localStorage.getItem('tasks') || '[]')
-	)
-
+export default function TaskModal({ handleAddTask }): ReactElement {
 	const [task, setTask] = useState({
 		id: '',
 		taskName: '',
@@ -25,8 +21,9 @@ export default function TaskModal(): ReactElement {
 			important: task.important,
 			completed: task.completed
 		}
-		setExistingTasks(previousTasks => [...previousTasks, newTask])
-		localStorage.setItem('tasks', JSON.stringify([...existingTasks, newTask]))
+		// setExistingTasks(previousTasks => [...previousTasks, newTask])
+		// localStorage.setItem('tasks', JSON.stringify([...existingTasks, newTask]))
+		handleAddTask(newTask)
 		setTask({
 			id: '',
 			taskName: '',
