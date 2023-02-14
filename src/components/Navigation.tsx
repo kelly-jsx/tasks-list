@@ -1,11 +1,18 @@
 import type { ReactElement } from 'react'
+import { useState } from 'react'
 import ThemeSwitcher from './ThemeSwitcher'
 
-// interface Properties {
-// 	error?: Error
-// }
+interface Properties {
+	showModal: (showModal: boolean) => void
+}
 
-export default function Navigation(): ReactElement {
+export default function Navigation(properties: Properties): ReactElement {
+	const [showModal, setShowModal] = useState(false)
+
+	const handleShowModal = () => {
+		showModal(true)
+	}
+
 	return (
 		<div className='drawer-mobile drawer'>
 			<input id='my-drawer-3' type='checkbox' className='drawer-toggle' />
@@ -38,19 +45,23 @@ export default function Navigation(): ReactElement {
 					<div className='hidden flex-none lg:block'>
 						<ul className='px-2'>
 							<li>
-								<button className='btn btn-primary'>Add Task</button>
+								<a href='#my-modal-2' className='btn btn-primary'>
+									Add Task
+								</a>
 							</li>
 						</ul>
 					</div>
 				</div>
-				Content
+				{properties.children}
 			</div>
 			<div className='drawer-side'>
 				<label htmlFor='my-drawer-3' className='drawer-overlay' />
 				<div className='menu flex w-80 flex-col content-center gap-4 bg-base-100 p-4'>
 					<h1 className='mt-4 text-center text-2xl font-bold'>Task List</h1>
 					<ThemeSwitcher />
-					<button className='btn btn-primary w-3/4'>Add Task</button>
+					<a href='#my-modal-2' className='btn btn-primary w-3/4'>
+						Add Task
+					</a>
 				</div>
 			</div>
 		</div>
