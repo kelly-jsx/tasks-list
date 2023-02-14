@@ -17,6 +17,7 @@ interface Properties {
 	taskFavourite: boolean
 	taskCategory: string
 	handleRemoveTask: (id: string) => void
+	handleFavouriteTask: (id: string) => void
 }
 
 export default function TaskItem(properties: Properties): ReactElement {
@@ -27,15 +28,12 @@ export default function TaskItem(properties: Properties): ReactElement {
 		taskCompleted,
 		taskFavourite,
 		taskCategory,
-		handleRemoveTask
+		handleRemoveTask,
+		handleFavouriteTask
 	} = properties
 
 	const [isFavourite, setFavourite] = useState(taskFavourite)
 	const [isCompleted, setCompleted] = useState(taskCompleted)
-
-	const handleClickFavourite = () => {
-		setFavourite(!isFavourite)
-	}
 
 	const handleClickCompleted = () => {
 		setCompleted(!isCompleted)
@@ -43,6 +41,14 @@ export default function TaskItem(properties: Properties): ReactElement {
 
 	const handleClickRemoveTask = id => {
 		handleRemoveTask(id)
+	}
+
+	const handleClickFavouriteTask = id => {
+		const newFavouriteValue = !isFavourite
+		setFavourite(newFavouriteValue)
+		if (newFavouriteValue !== taskFavourite) {
+			handleFavouriteTask(id, newFavouriteValue)
+		}
 	}
 
 	return (
@@ -66,7 +72,7 @@ export default function TaskItem(properties: Properties): ReactElement {
 				</button>
 				<button
 					className='btn btn-ghost btn-square btn-sm'
-					onClick={handleClickFavourite}
+					onClick={handleClickFavouriteTask}
 				>
 					{isFavourite ? (
 						<BsStarFill className='h-5 w-5' />

@@ -22,6 +22,17 @@ export default function GalleryPage(): ReactElement {
 		localStorage.setItem('tasks', JSON.stringify(updatedTasks))
 	}
 
+	const handleFavouriteTask = id => {
+		const updatedTasks = existingTasks.map(task => {
+			if (task.id === id) {
+				task.isFavourite = !task.isFavourite
+			}
+			return task
+		})
+		setExistingTasks(updatedTasks)
+		localStorage.setItem('tasks', JSON.stringify(updatedTasks))
+	}
+
 	return (
 		<>
 			<Head title='Task App' />
@@ -35,7 +46,9 @@ export default function GalleryPage(): ReactElement {
 							taskDate={task.date}
 							taskCategory={task.category}
 							taskCompleted={task.completed}
+							taskFavourite={task.isFavourite}
 							handleRemoveTask={() => handleRemoveTask(task.id)}
+							handleFavouriteTask={() => handleFavouriteTask(task.id)}
 						/>
 					))}
 				</TasksGrid>
