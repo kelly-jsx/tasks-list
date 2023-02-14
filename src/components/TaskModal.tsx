@@ -19,7 +19,7 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 			taskName: task.taskName,
 			description: task.description,
 			category: task.category || 'main',
-			date: 'dupa',
+			date: 'Will be added soon',
 			important: task.important,
 			completed: task.completed
 		}
