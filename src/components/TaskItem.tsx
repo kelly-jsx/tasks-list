@@ -12,18 +12,22 @@ import {
 interface Properties {
 	taskTitle: string
 	taskDescription: string
+	taskDate: string
 	taskCompleted: boolean
 	taskFavourite: boolean
 	taskCategory: string
+	handleRemoveTask: (id: string) => void
 }
 
 export default function TaskItem(properties: Properties): ReactElement {
 	const {
 		taskTitle,
 		taskDescription,
+		taskDate,
 		taskCompleted,
 		taskFavourite,
-		taskCategory
+		taskCategory,
+		handleRemoveTask
 	} = properties
 
 	const [isFavourite, setFavourite] = useState(taskFavourite)
@@ -37,11 +41,16 @@ export default function TaskItem(properties: Properties): ReactElement {
 		setCompleted(!isCompleted)
 	}
 
+	const handleClickRemoveTask = id => {
+		handleRemoveTask(id)
+	}
+
 	return (
 		<div className='flex flex-col rounded-lg bg-base-100 p-4 shadow-xl'>
 			<h2 className='card-title'>{taskTitle}</h2>
 			<p>{taskDescription}</p>
 			<div className='badge badge-accent mt-2'>{taskCategory}</div>
+			<p>{taskDate}</p>
 
 			<div className='mx-auto grid h-full grid-cols-4 content-end gap-4'>
 				<div className='divider col-span-4 mb-0' />
@@ -65,7 +74,10 @@ export default function TaskItem(properties: Properties): ReactElement {
 						<BsStar className='h-5 w-5' />
 					)}
 				</button>
-				<button className='btn btn-ghost btn-square btn-sm'>
+				<button
+					className='btn btn-ghost btn-square btn-sm'
+					onClick={handleClickRemoveTask}
+				>
 					<BsTrashFill className='h-5 w-5' />
 				</button>
 				<button className='btn btn-ghost btn-square btn-sm'>

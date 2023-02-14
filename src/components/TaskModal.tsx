@@ -8,6 +8,7 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 		taskName: '',
 		description: '',
 		category: '',
+		date: '',
 		important: false,
 		completed: false
 	})
@@ -18,6 +19,7 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 			taskName: task.taskName,
 			description: task.description,
 			category: task.category || 'main',
+			date: 'dupa',
 			important: task.important,
 			completed: task.completed
 		}
@@ -29,6 +31,7 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 			taskName: '',
 			description: '',
 			category: '',
+			date: '',
 			important: false,
 			completed: false
 		})
