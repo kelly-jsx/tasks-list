@@ -18,6 +18,7 @@ interface Properties {
 	taskCategory: string
 	handleRemoveTask: (id: string) => void
 	handleFavouriteTask: (id: string) => void
+	handleCompleteTask: (id: string) => void
 }
 
 export default function TaskItem(properties: Properties): ReactElement {
@@ -29,15 +30,12 @@ export default function TaskItem(properties: Properties): ReactElement {
 		taskFavourite,
 		taskCategory,
 		handleRemoveTask,
-		handleFavouriteTask
+		handleFavouriteTask,
+		handleCompleteTask
 	} = properties
 
 	const [isFavourite, setFavourite] = useState(taskFavourite)
 	const [isCompleted, setCompleted] = useState(taskCompleted)
-
-	const handleClickCompleted = () => {
-		setCompleted(!isCompleted)
-	}
 
 	const handleClickRemoveTask = id => {
 		handleRemoveTask(id)
@@ -48,6 +46,14 @@ export default function TaskItem(properties: Properties): ReactElement {
 		setFavourite(newFavouriteValue)
 		if (newFavouriteValue !== taskFavourite) {
 			handleFavouriteTask(id, newFavouriteValue)
+		}
+	}
+
+	const handleClickCompleteTask = id => {
+		const newCompletedValue = !isCompleted
+		setCompleted(newCompletedValue)
+		if (newCompletedValue !== taskCompleted) {
+			handleCompleteTask(id, newCompletedValue)
 		}
 	}
 
@@ -62,7 +68,7 @@ export default function TaskItem(properties: Properties): ReactElement {
 				<div className='divider col-span-4 mb-0' />
 				<button
 					className='btn btn-ghost btn-square btn-sm'
-					onClick={handleClickCompleted}
+					onClick={handleClickCompleteTask}
 				>
 					{isCompleted ? (
 						<BsCheckCircleFill className='h-5 w-5' />
