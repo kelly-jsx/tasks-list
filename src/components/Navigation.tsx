@@ -1,5 +1,4 @@
 import type { ReactElement } from 'react'
-import { useState } from 'react'
 import ThemeSwitcher from './ThemeSwitcher'
 
 interface Properties {
@@ -7,14 +6,8 @@ interface Properties {
 }
 
 export default function Navigation(properties: Properties): ReactElement {
-	const [showModal, setShowModal] = useState(false)
-
-	const handleShowModal = () => {
-		showModal(true)
-	}
-
 	return (
-		<div className='drawer-mobile drawer'>
+		<div className='drawer drawer-mobile'>
 			<input id='my-drawer-3' type='checkbox' className='drawer-toggle' />
 			<div className='drawer-content flex flex-col'>
 				<div className='navbar w-full bg-base-300'>
