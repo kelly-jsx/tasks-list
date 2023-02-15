@@ -1,3 +1,4 @@
+import DeleteModal from 'components/DeleteModal'
 import Head from 'components/Head'
 import Navigation from 'components/Navigation'
 import TaskItem from 'components/TaskItem'
@@ -22,6 +23,20 @@ export default function GalleryPage(): ReactElement {
 		const updatedTasks = existingTasks.filter(task => task.id !== id)
 		setExistingTasks(updatedTasks)
 		localStorage.setItem('tasks', JSON.stringify(updatedTasks))
+		setSelectedTask('')
+	}
+
+	const handleSelectTask = id => {
+		existingTasks.map(task => {
+			if (task.id === id) {
+				setSelectedTask(task.id)
+			}
+			return task
+		})
+	}
+
+	const handleUnselectTask = () => {
+		setSelectedTask('')
 	}
 
 	const handleFavouriteTask = id => {
@@ -54,13 +69,14 @@ export default function GalleryPage(): ReactElement {
 					{existingTasks.map(task => (
 						<TaskItem
 							key={task.id}
+							taskId={task.id}
 							taskTitle={task.taskName}
 							taskDescription={task.description}
 							taskDate={task.date}
 							taskCategory={task.category}
 							taskCompleted={task.completed}
 							taskFavourite={task.isFavourite}
-							handleRemoveTask={() => handleRemoveTask(task.id)}
+							handleRemoveTask={() => handleSelectTask(task.id)}
 							handleFavouriteTask={() => handleFavouriteTask(task.id)}
 							handleCompleteTask={() => handleCompleteTask(task.id)}
 						/>
@@ -68,6 +84,10 @@ export default function GalleryPage(): ReactElement {
 				</TasksGrid>
 			</Navigation>
 			<TaskModal handleAddTask={handleAddTask} />
+			<DeleteModal
+				handleUnselectTask={handleUnselectTask}
+				handleRemoveTask={() => handleRemoveTask(selectedTask)}
+			/>
 		</>
 	)
 }

@@ -2,10 +2,11 @@ import type { ReactElement } from 'react'
 
 interface Properties {
 	handleRemoveTask: (id: string) => void
+	handleUnselectTask: (id: string) => void
 }
 
 export default function DeleteModal(properties: Properties): ReactElement {
-	const { handleRemoveTask } = properties
+	const { handleRemoveTask, handleUnselectTask } = properties
 
 	return (
 		<div className='modal' id='delete-modal'>
@@ -13,7 +14,7 @@ export default function DeleteModal(properties: Properties): ReactElement {
 				<h3 className='text-lg font-bold'>Are you sure?</h3>
 				<p className='py-4'>This task will be deleted permanently.</p>
 				<div className='modal-action'>
-					<a href='#' className='btn btn-ghost'>
+					<a href='#' className='btn btn-ghost' onClick={handleUnselectTask}>
 						Cancel
 					</a>
 					<a href='#' className='btn btn-error' onClick={handleRemoveTask}>
