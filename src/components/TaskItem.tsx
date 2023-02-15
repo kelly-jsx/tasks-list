@@ -71,14 +71,16 @@ export default function TaskItem(properties: Properties): ReactElement {
 				{taskTitle}
 			</h2>
 			<p
-				className={`${taskCompleted ? 'line-through' : null} mb-4 break-words`}
+				className={`${
+					taskCompleted ? 'line-through' : null
+				} mb-4 mt-2 break-words`}
 			>
 				{taskDescription}
 			</p>
 
 			<div className='mx-auto mt-4 grid h-full w-full grid-cols-2 content-end'>
 				{taskImportant ? (
-					<div className='badge badge-error col-span-2'>important</div>
+					<div className='badge badge-error col-span-2 mb-1'>important</div>
 				) : null}
 				<div className='badge badge-accent col-span-2'>{taskCategory}</div>
 				<p

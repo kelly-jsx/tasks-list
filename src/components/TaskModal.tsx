@@ -84,7 +84,7 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 							onChange={handleInputChange}
 						>
 							<option value='main'>Main</option>
-							<option value='secondary'>Secondary</option>
+							{/* <option value='secondary'>Secondary</option> */}
 						</select>
 					</div>
 					<label className='label mt-1 w-full max-w-sm cursor-pointer place-content-start gap-2'>
