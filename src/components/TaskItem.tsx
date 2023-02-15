@@ -17,6 +17,7 @@ interface Properties {
 	taskCompleted: boolean
 	taskFavourite: boolean
 	taskCategory: string
+	taskImportant: boolean
 	handleFavouriteTask: (id: string) => void
 	handleCompleteTask: (id: string) => void
 	handleRemoveTask: (id: string) => void
@@ -31,6 +32,7 @@ export default function TaskItem(properties: Properties): ReactElement {
 		taskCompleted,
 		taskFavourite,
 		taskCategory,
+		taskImportant,
 		handleFavouriteTask,
 		handleCompleteTask,
 		handleRemoveTask
@@ -60,54 +62,65 @@ export default function TaskItem(properties: Properties): ReactElement {
 	}
 
 	return (
-		<div className='flex flex-col rounded-lg bg-base-100 p-4 shadow-xl'>
-			<h2 className={`card-title ${taskCompleted ? 'line-through' : null}`}>
+		<div className='flex flex-col rounded-lg bg-base-200 p-4 shadow-xl'>
+			<h2
+				className={`break-words text-lg font-bold ${
+					taskCompleted ? 'line-through' : null
+				}`}
+			>
 				{taskTitle}
 			</h2>
-			<p className={`${taskCompleted ? 'line-through' : null}`}>
+			<p
+				className={`${taskCompleted ? 'line-through' : null} mb-4 break-words`}
+			>
 				{taskDescription}
 			</p>
-			<div className='badge badge-accent mt-2'>{taskCategory}</div>
-			<p>{taskDate}</p>
 
-			<div className='mx-auto grid h-full grid-cols-4 content-end gap-4'>
-				<div className='divider col-span-4 mb-0' />
-				<button
-					className='btn btn-ghost btn-square btn-sm '
-					onClick={handleClickCompleteTask}
+			<div className='mx-auto mt-4 grid h-full w-full grid-cols-2 content-end'>
+				{taskImportant ? (
+					<div className='badge badge-error col-span-2'>important</div>
+				) : null}
+				<div className='badge badge-accent col-span-2'>{taskCategory}</div>
+				<p
+					className={`${
+						taskCompleted ? 'line-through' : null
+					} col-span-2 -mb-4`}
 				>
-					{isCompleted ? (
-						<BsCheckCircleFill className='h-5 w-5' />
-					) : (
-						<BsCheckCircle className='h-5 w-5' />
-					)}
-				</button>
-				<button
-					className='btn btn-ghost btn-square btn-sm'
-					onClick={handleClickFavouriteTask}
-				>
-					{isFavourite ? (
-						<BsStarFill className='h-5 w-5' />
-					) : (
-						<BsStar className='h-5 w-5' />
-					)}
-				</button>
-				{/* <button
+					{taskDate}
+				</p>
+				<div className='divider col-span-2 -mb-0' />
+				<div className='col-span-2 flex justify-between'>
+					<button
+						className='btn btn-ghost btn-square btn-sm'
+						onClick={handleClickCompleteTask}
+					>
+						{isCompleted ? (
+							<BsCheckCircleFill className='h-5 w-5' />
+						) : (
+							<BsCheckCircle className='h-5 w-5' />
+						)}
+					</button>
+					<button
+						className='btn btn-ghost btn-square btn-sm'
+						onClick={handleClickFavouriteTask}
+					>
+						{isFavourite ? (
+							<BsStarFill className='h-5 w-5' />
+						) : (
+							<BsStar className='h-5 w-5' />
+						)}
+					</button>
+					<a
+						href='#delete-modal'
 						className='btn btn-ghost btn-square btn-sm'
 						onClick={handleClickRemoveTask}
 					>
 						<BsTrashFill className='h-5 w-5' />
-					</button> */}
-				<a
-					href='#delete-modal'
-					className='btn btn-ghost btn-square btn-sm'
-					onClick={handleClickRemoveTask}
-				>
-					<BsTrashFill className='h-5 w-5' />
-				</a>
-				<button className='btn btn-ghost btn-square btn-sm'>
-					<BsPencilFill className='h-5 w-5' />
-				</button>
+					</a>
+					<button className='btn btn-ghost btn-square btn-sm'>
+						<BsPencilFill className='h-5 w-5' />
+					</button>
+				</div>
 			</div>
 		</div>
 	)

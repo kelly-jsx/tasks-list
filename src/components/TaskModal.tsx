@@ -13,18 +13,26 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 		completed: false
 	})
 
+	const date = new Date()
+	const year = date.getFullYear()
+	const month = (date.getMonth() + 1).toString().padStart(2, '0')
+	const day = date.getDate().toString().padStart(2, '0')
+	const hours = date.getHours().toString().padStart(2, '0')
+	const minutes = date.getMinutes().toString().padStart(2, '0')
+	const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`
+
 	const handleClick = () => {
 		const newTask = {
 			id: uuidv4(),
 			taskName: task.taskName,
 			description: task.description,
 			category: task.category || 'main',
-			date: 'Will be added soon',
+			// date: 'Will be added soon',
+			date: formattedDate,
 			important: task.important,
 			completed: task.completed
 		}
-		// setExistingTasks(previousTasks => [...previousTasks, newTask])
-		// localStorage.setItem('tasks', JSON.stringify([...existingTasks, newTask]))
+
 		handleAddTask(newTask)
 		setTask({
 			id: '',

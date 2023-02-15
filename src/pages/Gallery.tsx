@@ -76,6 +76,7 @@ export default function GalleryPage(): ReactElement {
 							taskCategory={task.category}
 							taskCompleted={task.completed}
 							taskFavourite={task.isFavourite}
+							taskImportant={task.important}
 							handleRemoveTask={() => handleSelectTask(task.id)}
 							handleFavouriteTask={() => handleFavouriteTask(task.id)}
 							handleCompleteTask={() => handleCompleteTask(task.id)}
