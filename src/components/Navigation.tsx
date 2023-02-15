@@ -38,7 +38,7 @@ export default function Navigation(properties: Properties): ReactElement {
 					<div className='hidden flex-none lg:block'>
 						<ul className='px-2'>
 							<li>
-								<a href='#my-modal-2' className='btn btn-primary'>
+								<a href='#task-modal' className='btn btn-primary'>
 									Add Task
 								</a>
 							</li>
@@ -52,7 +52,7 @@ export default function Navigation(properties: Properties): ReactElement {
 				<div className='menu flex w-80 flex-col content-center gap-4 bg-base-100 p-4'>
 					<h1 className='mt-4 text-center text-2xl font-bold'>Task List</h1>
 					<ThemeSwitcher />
-					<a href='#my-modal-2' className='btn btn-primary w-3/4'>
+					<a href='#task-modal' className='btn btn-primary w-3/4'>
 						Add Task
 					</a>
 				</div>

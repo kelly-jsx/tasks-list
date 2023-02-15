@@ -46,7 +46,7 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 	}
 
 	return (
-		<div className='modal' id='my-modal-2'>
+		<div className='modal' id='task-modal'>
 			<div className='modal-box'>
 				<h3 className='text-lg font-bold'>Add new task</h3>
 				<div className='mt-5 flex w-full flex-col items-center justify-center'>

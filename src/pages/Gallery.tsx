@@ -11,6 +11,8 @@ export default function GalleryPage(): ReactElement {
 		JSON.parse(localStorage.getItem('tasks')) || []
 	)
 
+	const [selectedTask, setSelectedTask] = useState('')
+
 	const handleAddTask = newTask => {
 		setExistingTasks(previousTasks => [...previousTasks, newTask])
 		localStorage.setItem('tasks', JSON.stringify([...existingTasks, newTask]))
