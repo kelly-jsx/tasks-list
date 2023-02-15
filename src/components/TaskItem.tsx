@@ -59,15 +59,19 @@ export default function TaskItem(properties: Properties): ReactElement {
 
 	return (
 		<div className='flex flex-col rounded-lg bg-base-100 p-4 shadow-xl'>
-			<h2 className='card-title'>{taskTitle}</h2>
-			<p>{taskDescription}</p>
+			<h2 className={`card-title ${taskCompleted ? 'line-through' : null}`}>
+				{taskTitle}
+			</h2>
+			<p className={`${taskCompleted ? 'line-through' : null}`}>
+				{taskDescription}
+			</p>
 			<div className='badge badge-accent mt-2'>{taskCategory}</div>
 			<p>{taskDate}</p>
 
 			<div className='mx-auto grid h-full grid-cols-4 content-end gap-4'>
 				<div className='divider col-span-4 mb-0' />
 				<button
-					className='btn btn-ghost btn-square btn-sm'
+					className='btn btn-ghost btn-square btn-sm '
 					onClick={handleClickCompleteTask}
 				>
 					{isCompleted ? (
