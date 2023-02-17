@@ -20,7 +20,7 @@ interface Properties {
 	taskImportant: boolean
 	handleFavouriteTask: (id: string) => void
 	handleCompleteTask: (id: string) => void
-	handleRemoveTask: (id: string) => void
+	handleSelectTask: (id: string) => void
 }
 
 export default function TaskItem(properties: Properties): ReactElement {
@@ -35,7 +35,7 @@ export default function TaskItem(properties: Properties): ReactElement {
 		taskImportant,
 		handleFavouriteTask,
 		handleCompleteTask,
-		handleRemoveTask
+		handleSelectTask
 	} = properties
 
 	const [isFavourite, setFavourite] = useState(taskFavourite)
@@ -57,8 +57,8 @@ export default function TaskItem(properties: Properties): ReactElement {
 		}
 	}
 
-	const handleClickRemoveTask = id => {
-		handleRemoveTask(id)
+	const handleClickSelectTask = id => {
+		handleSelectTask(id)
 	}
 
 	return (
@@ -113,15 +113,19 @@ export default function TaskItem(properties: Properties): ReactElement {
 						)}
 					</button>
 					<a
+						href='#edit-modal'
+						className='btn btn-ghost btn-square btn-sm'
+						onClick={handleClickSelectTask}
+					>
+						<BsPencilFill className='h-5 w-5' />
+					</a>
+					<a
 						href='#delete-modal'
 						className='btn btn-ghost btn-square btn-sm'
-						onClick={handleClickRemoveTask}
+						onClick={handleClickSelectTask}
 					>
 						<BsTrashFill className='h-5 w-5' />
 					</a>
-					<button className='btn btn-ghost btn-square btn-sm'>
-						<BsPencilFill className='h-5 w-5' />
-					</button>
 				</div>
 			</div>
 		</div>

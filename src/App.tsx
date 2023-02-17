@@ -12,7 +12,7 @@ export default function App(): ReactElement {
 			<Suspense fallback={<LoadingOrError />}>
 				<Routes>
 					<Route path='/' element={<Gallery />} />
-					<Route path=':fruitName' element={<Details />} />
+					<Route path='/test' element={<Details />} />
 				</Routes>
 			</Suspense>
 		</BrowserRouter>

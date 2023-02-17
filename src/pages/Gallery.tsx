@@ -1,4 +1,5 @@
 import DeleteModal from 'components/DeleteModal'
+import EditModal from 'components/EditModal'
 import Head from 'components/Head'
 import Navigation from 'components/Navigation'
 import TaskItem from 'components/TaskItem'
@@ -29,7 +30,7 @@ export default function GalleryPage(): ReactElement {
 	const handleSelectTask = id => {
 		existingTasks.map(task => {
 			if (task.id === id) {
-				setSelectedTask(task.id)
+				setSelectedTask(task)
 			}
 			return task
 		})
@@ -61,6 +62,17 @@ export default function GalleryPage(): ReactElement {
 		localStorage.setItem('tasks', JSON.stringify(updatedTasks))
 	}
 
+	const handleEditTask = id => {
+		const updatedTasks = existingTasks.map(task => {
+			if (task.id === id) {
+				setSelectedTask(task)
+			}
+			return task
+		})
+		setExistingTasks(updatedTasks)
+		localStorage.setItem('tasks', JSON.stringify(updatedTasks))
+	}
+
 	return (
 		<>
 			<Head title='Task App' />
@@ -70,14 +82,14 @@ export default function GalleryPage(): ReactElement {
 						<TaskItem
 							key={task.id}
 							taskId={task.id}
-							taskTitle={task.taskName}
+							taskTitle={task.title}
 							taskDescription={task.description}
 							taskDate={task.date}
 							taskCategory={task.category}
 							taskCompleted={task.completed}
 							taskFavourite={task.isFavourite}
 							taskImportant={task.important}
-							handleRemoveTask={() => handleSelectTask(task.id)}
+							handleSelectTask={() => handleSelectTask(task.id)}
 							handleFavouriteTask={() => handleFavouriteTask(task.id)}
 							handleCompleteTask={() => handleCompleteTask(task.id)}
 						/>
@@ -87,7 +99,12 @@ export default function GalleryPage(): ReactElement {
 			<TaskModal handleAddTask={handleAddTask} />
 			<DeleteModal
 				handleUnselectTask={handleUnselectTask}
-				handleRemoveTask={() => handleRemoveTask(selectedTask)}
+				handleRemoveTask={() => handleRemoveTask(selectedTask.id)}
+			/>
+			<EditModal
+				selectedTask={selectedTask}
+				taskTitle={selectedTask.title}
+				handleUnselectTask={handleUnselectTask}
 			/>
 		</>
 	)

@@ -2,13 +2,23 @@ import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-export default function TaskModal({ handleAddTask }): ReactElement {
+interface Properties {
+	handleEditTask: () => void
+	selectedTask: any
+	taskTitle: string
+	taskDescription: string
+	taskCompleted: boolean
+	taskCategory: string
+	taskImportant: boolean
+}
+
+export default function EditModal(properties: Properties): ReactElement {
+	const { handleEditTask, taskTitle, selectedTask } = properties
+
 	const [task, setTask] = useState({
-		id: '',
-		title: '',
+		title: selectedTask.title,
 		description: '',
 		category: '',
-		date: '',
 		important: false,
 		completed: false
 	})
@@ -32,7 +42,7 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 			completed: task.completed
 		}
 
-		handleAddTask(newTask)
+		handleEditTask(newTask)
 		setTask({
 			id: '',
 			title: '',
@@ -53,16 +63,16 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 	}
 
 	return (
-		<div className='modal' id='task-modal'>
+		<div className='modal' id='edit-modal'>
 			<div className='modal-box'>
-				<h3 className='text-lg font-bold'>Add new task</h3>
+				<h3 className='text-lg font-bold'>Edit task</h3>
 				<div className='mt-5 flex w-full flex-col items-center justify-center'>
 					<input
 						type='text'
 						placeholder='Task title'
 						className='input input-bordered w-full max-w-sm'
 						name='title'
-						value={task.title}
+						value={selectedTask.title}
 						onChange={handleInputChange}
 					/>
 					<textarea
@@ -83,6 +93,7 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 							onChange={handleInputChange}
 						>
 							<option value='main'>Main</option>
+							{/* <option value='secondary'>Secondary</option> */}
 						</select>
 					</div>
 					<label className='label mt-1 w-full max-w-sm cursor-pointer place-content-start gap-2'>
@@ -119,7 +130,7 @@ export default function TaskModal({ handleAddTask }): ReactElement {
 						Cancel
 					</a>
 					<a href='#' className='btn btn-primary' onClick={handleClick}>
-						Add Task
+						Edit Task
 					</a>
 				</div>
 			</div>

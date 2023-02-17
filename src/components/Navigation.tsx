@@ -7,7 +7,7 @@ interface Properties {
 
 export default function Navigation(properties: Properties): ReactElement {
 	return (
-		<div className='drawer drawer-mobile'>
+		<div className='drawer-mobile drawer'>
 			<input id='my-drawer-3' type='checkbox' className='drawer-toggle' />
 			<div className='drawer-content flex flex-col'>
 				<div className='navbar w-full bg-base-300'>
@@ -52,9 +52,25 @@ export default function Navigation(properties: Properties): ReactElement {
 				<div className='menu flex w-80 flex-col content-center gap-4 bg-base-100 p-4'>
 					<h1 className='mt-4 text-center text-2xl font-bold'>Task List</h1>
 					<ThemeSwitcher />
-					<a href='#task-modal' className='btn btn-primary w-3/4'>
+					<a href='#task-modal' className='btn btn-primary mx-auto w-3/4'>
 						Add Task
 					</a>
+					<div className='mx-auto w-full'>
+						<ul className='menu rounded-box bg-base-200'>
+							<li className='bordered'>
+								<a>All tasks</a>
+							</li>
+							<li>
+								<a>Important</a>
+							</li>
+							<li>
+								<a>Completed</a>
+							</li>
+							<li>
+								<a>Uncompleted</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
